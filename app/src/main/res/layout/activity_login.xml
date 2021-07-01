@@ -46,8 +46,7 @@
         android:background="@drawable/btn_blue"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true">
+        android:layout_marginBottom="16dp">
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -69,6 +68,7 @@
         android:gravity="center"
         android:layout_marginBottom="16dp"/>
     <RelativeLayout
+        android:id="@+id/RelativeLayout_facebookLogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/btn_dark_blue"
@@ -85,7 +85,7 @@
             android:id="@+id/TextView_Login_with_Facebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="Login with Facebook"
             android:textSize="18dp"
             android:textColor="#ffffff"
             android:layout_centerInParent="true"/>
