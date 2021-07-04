@@ -44,13 +44,37 @@
             android:text="Contents"
             android:background="#00BCD4"/>
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="250dp"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:background="#009688"
-            android:gravity="center"
-            android:text="Drawer"
-            android:textSize="48sp" />
+            android:background="#009688">
+            <ImageButton
+                android:id="@+id/IMG_B1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/IMG_B2"/>
+            <ImageButton
+                android:id="@+id/IMG_B2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/IMG_B3"/>
+            <ImageButton
+                android:id="@+id/IMG_B3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/IMG_B4"/>
+            <ImageButton
+                android:id="@+id/IMG_B4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.drawerlayout.widget.DrawerLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
