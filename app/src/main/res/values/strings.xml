@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">앱 개발 연습</string>
+    <string name="correct_username">HJTN</string>
+    <string name="correct_password">HJTN1234</string>
+</resources>
