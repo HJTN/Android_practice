@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.movieapi_practice.databinding.ActivityMainBinding;
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         init();
         initDownload();
-        // listener();
+        listener();
     }
 
     private void init() {
@@ -60,6 +62,32 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<YtsData> call, Throwable t) {
                 Log.d(TAG, "onFailure:" + t);
                 Toast.makeText(mContext, "Download Fail", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void listener() {
+
+        binding.toolbarIncludes.menuIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG,"Clicked");
+
+                if(!binding.DrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+                    binding.DrawerLayout.openDrawer(Gravity.LEFT);
+                }
+                else if(binding.DrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+                    binding.DrawerLayout.closeDrawer(Gravity.LEFT);
+                }
+            }
+        });
+
+        binding.DIIncludes.btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(binding.DrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+                    binding.DrawerLayout.closeDrawer(Gravity.LEFT);
+                }
             }
         });
     }

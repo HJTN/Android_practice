@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,13 +9,28 @@
     tools:context=".MainActivity">
 
     <include
-        android:id="@+id/includes"
+        android:id="@+id/toolbar_includes"
         layout="@layout/toolbar_main"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rc_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F5F3F3"/>
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/DrawerLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_includes"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F5F3F3"/>
+
+        <include
+            android:id="@+id/DI_includes"
+            layout="@layout/drawer_item"/>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
