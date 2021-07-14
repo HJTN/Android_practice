@@ -1,5 +1,6 @@
 package com.example.movieapi_practice;
 
+import android.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -35,12 +37,13 @@ public class YtsAdapter extends RecyclerView.Adapter<YtsAdapter.CardView> {
     public YtsAdapter.CardView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.movie_item,parent, false);
+        //Log.d(TAG, "onCreateViewHolder : " + view.toString());
         return new CardView(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CardView holder, int position) {
-        Log.d(TAG, "onBindViewHolder: "+position);
+        Log.d(TAG, "onBindViewHolder: " + position);
         holder.setCard(cardModels.get(position));
     }
 
@@ -50,7 +53,6 @@ public class YtsAdapter extends RecyclerView.Adapter<YtsAdapter.CardView> {
     }
 
     public static class CardView extends RecyclerView.ViewHolder {
-
 
         private TextView tvTitle, tvScore;
         private ImageView ivImage;
@@ -62,6 +64,7 @@ public class YtsAdapter extends RecyclerView.Adapter<YtsAdapter.CardView> {
             tvScore = itemView.findViewById(R.id.tv_rating);
             ivImage = itemView.findViewById(R.id.iv_poster);
             ratingBar = itemView.findViewById(R.id.rating_bar);
+
         }
 
         public void setCard(YtsData.MyData.Movie movie) {
@@ -69,6 +72,7 @@ public class YtsAdapter extends RecyclerView.Adapter<YtsAdapter.CardView> {
             tvScore.setText(movie.getRating() + "");
             Picasso.get().load(movie.getMedium_cover_image()).into(ivImage);
             ratingBar.setRating(movie.getRating() / 2);
+
         }
 
     }

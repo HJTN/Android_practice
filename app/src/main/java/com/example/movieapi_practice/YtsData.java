@@ -28,12 +28,12 @@ public class YtsData {
         public class Movie {
             private String title;
             private float rating;
+            private String summary;
             private String medium_cover_image;
 
             public void setTitle(String title) {
                 this.title = title;
             }
-
             public String getTitle() {
                 return title;
             }
@@ -41,15 +41,20 @@ public class YtsData {
             public void setRating(float rating) {
                 this.rating = rating;
             }
-
             public float getRating() {
                 return rating;
+            }
+
+            public void setSummary(String summary){
+                this.summary = summary;
+            }
+            public String getSummary() {
+                return summary;
             }
 
             public void setMedium_cover_image(String medium_cover_image){
                 this.medium_cover_image = medium_cover_image;
             }
-
             public String getMedium_cover_image() {
                 return medium_cover_image;
             }

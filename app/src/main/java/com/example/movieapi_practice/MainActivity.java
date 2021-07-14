@@ -1,18 +1,25 @@
 package com.example.movieapi_practice;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.movieapi_practice.databinding.ActivityMainBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         init();
         initDownload();
         listener();
+        list_view();
     }
 
     private void init() {
@@ -73,11 +81,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG,"Clicked");
 
-                if(!binding.DrawerLayout.isDrawerOpen(Gravity.LEFT)) {
-                    binding.DrawerLayout.openDrawer(Gravity.LEFT);
+                if(!binding.DYMain.isDrawerOpen(Gravity.LEFT)) {
+                    binding.DYMain.openDrawer(Gravity.LEFT);
                 }
-                else if(binding.DrawerLayout.isDrawerOpen(Gravity.LEFT)) {
-                    binding.DrawerLayout.closeDrawer(Gravity.LEFT);
+                else if(binding.DYMain.isDrawerOpen(Gravity.LEFT)) {
+                    binding.DYMain.closeDrawer(Gravity.LEFT);
                 }
             }
         });
@@ -85,10 +93,34 @@ public class MainActivity extends AppCompatActivity {
         binding.DIIncludes.btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(binding.DrawerLayout.isDrawerOpen(Gravity.LEFT)) {
-                    binding.DrawerLayout.closeDrawer(Gravity.LEFT);
+                if(binding.DYMain.isDrawerOpen(Gravity.LEFT)) {
+                    binding.DYMain.closeDrawer(Gravity.LEFT);
                 }
             }
         });
+
+        binding.toolbarIncludes.searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Clicked Search Button");
+
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void list_view() {
+        List<String> data = new ArrayList<>();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(mContext,
+                android.R.layout.simple_list_item_1, data);
+
+        binding.DIIncludes.listview.setAdapter(adapter);
+
+        data.add("Genre");
+        adapter.notifyDataSetChanged();
     }
 }
