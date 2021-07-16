@@ -2,6 +2,8 @@ package com.example.movieapi_practice;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -13,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movieapi_practice.databinding.ActivitySearchBinding;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,12 +25,12 @@ import retrofit2.Response;
 public class SearchActivity extends AppCompatActivity {
 
     private static final String TAG = "Search_Activity";
-    private String findD = "";
 
     private ActivitySearchBinding binding;
     private YtsAdapter cardAdapter = new YtsAdapter();
     private RecyclerView.LayoutManager layoutManager;
     private Context mContext = SearchActivity.this;
+    private List<YtsData.MyData.Movie> Sc_movies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +39,9 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         init();
-        binding.scToolBarIncludes.searchIC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initDownload();
-            }
-        });
+        initDownload();
+        listener();
+
     }
 
     private void init() {
@@ -53,20 +55,14 @@ public class SearchActivity extends AppCompatActivity {
         call.enqueue(new Callback<YtsData>() {
             @Override
             public void onResponse(Call<YtsData> call, Response<YtsData> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     YtsData ytsData = response.body();
                     Log.d(TAG, "onResponse:" + ytsData);
 
-                    findD += binding.scToolBarIncludes.edittext.getText().toString();
-
                     binding.scRcCard.setAdapter(cardAdapter);
-                    if(findD != null) {
-                        for(YtsData.MyData.Movie movie : ytsData.getData().getMovies()) {
-                            if(findD.equals(movie.getTitle())) {
-                                cardAdapter.addCardModel(movie);
-                            }
-                        }
-                    }
+                    cardAdapter.addCardModel(ytsData.getData().getMovies());
+
+                    Sc_movies.addAll(ytsData.getData().getMovies());
                 }
             }
 
@@ -76,5 +72,41 @@ public class SearchActivity extends AppCompatActivity {
                 Toast.makeText(mContext, "Download Fail", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void listener() {
+        binding.scToolBarIncludes.edittext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String findD = binding.scToolBarIncludes.edittext.getText().toString();
+                search(findD);
+            }
+        });
+    }
+
+    private void search(String data) {
+        cardAdapter.removeCardModel();
+
+        if (data.length() == 0) {
+            cardAdapter.addCardModel(Sc_movies);
+        } else {
+            for (int i = 0; i < Sc_movies.size(); i++) {
+                if (Sc_movies.get(i).getTitle().toLowerCase().contains(data)) {
+                    cardAdapter.addCardModel(Sc_movies.get(i));
+                }
+            }
+        }
+
+        cardAdapter.notifyDataSetChanged();
     }
 }

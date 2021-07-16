@@ -1,6 +1,7 @@
 package com.example.movieapi_practice;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 public class YtsAdapter extends RecyclerView.Adapter<YtsAdapter.CardView> {
     private static final String TAG = "YtsAdapter";
 
@@ -29,7 +32,15 @@ public class YtsAdapter extends RecyclerView.Adapter<YtsAdapter.CardView> {
     }
 
     public void addCardModel(List<YtsData.MyData.Movie> movies) {
-        cardModels = movies;
+        cardModels.addAll(movies);
+    }
+
+    public List<YtsData.MyData.Movie> getCardModels() {
+        return cardModels;
+    }
+
+    public void removeCardModel() {
+        this.cardModels.clear();
     }
 
     @NonNull
@@ -57,6 +68,7 @@ public class YtsAdapter extends RecyclerView.Adapter<YtsAdapter.CardView> {
         private TextView tvTitle, tvScore;
         private ImageView ivImage;
         private RatingBar ratingBar;
+        private List<YtsData.MyData.Movie> images = new ArrayList<>();
 
         public CardView(@NonNull View itemView) {
             super(itemView);
@@ -65,12 +77,25 @@ public class YtsAdapter extends RecyclerView.Adapter<YtsAdapter.CardView> {
             ivImage = itemView.findViewById(R.id.iv_poster);
             ratingBar = itemView.findViewById(R.id.rating_bar);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(itemView.getContext(), MovieDetailActivity.class);
+                    intent.putExtra("image", images.get(getAdapterPosition()).getMedium_cover_image());
+                    intent.putExtra("title", images.get(getAdapterPosition()).getTitle());
+                    intent.putExtra("summary", images.get(getAdapterPosition()).getSummary());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    startActivity(itemView.getContext(),intent, null);
+                }
+            });
         }
 
         public void setCard(YtsData.MyData.Movie movie) {
             tvTitle.setText(movie.getTitle());
             tvScore.setText(movie.getRating() + "");
             Picasso.get().load(movie.getMedium_cover_image()).into(ivImage);
+            images.add(movie);
             ratingBar.setRating(movie.getRating() / 2);
 
         }
