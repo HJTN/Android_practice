@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/toolbar_sub"
+    app:contentInsetStart="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <ImageButton
+                android:layout_marginLeft="50dp"
+                android:id="@+id/TS_back"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/arrowback"
+                android:layout_alignParentLeft="true"/>
+
+            <ImageButton
+                android:id="@+id/TS_home"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/home"
+                android:text="Movie"
+                android:layout_centerInParent="true"/>
+
+            <ImageButton
+                android:layout_marginRight="50dp"
+                android:id="@+id/TS_like"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/thumbup"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</androidx.appcompat.widget.Toolbar>

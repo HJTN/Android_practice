@@ -2,6 +2,7 @@ package com.example.movieapi_practice;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,6 +70,7 @@ public class YtsAdapter extends RecyclerView.Adapter<YtsAdapter.CardView> {
         private ImageView ivImage;
         private RatingBar ratingBar;
         private List<YtsData.MyData.Movie> images = new ArrayList<>();
+        private YtsData.MyData.Movie tm;
 
         public CardView(@NonNull View itemView) {
             super(itemView);
@@ -92,6 +94,8 @@ public class YtsAdapter extends RecyclerView.Adapter<YtsAdapter.CardView> {
         }
 
         public void setCard(YtsData.MyData.Movie movie) {
+            tm = movie;
+
             tvTitle.setText(movie.getTitle());
             tvScore.setText(movie.getRating() + "");
             Picasso.get().load(movie.getMedium_cover_image()).into(ivImage);

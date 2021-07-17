@@ -110,6 +110,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        binding.toolbarSubIncludes.TSLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Clicked Like Button");
+
+                Intent intent = new Intent(MainActivity.this, MovieLikeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                startActivity(intent);
+            }
+        });
     }
 
     private void list_view() {

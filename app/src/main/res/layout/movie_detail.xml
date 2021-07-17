@@ -37,5 +37,11 @@
             android:text="summary..."
             android:textSize="20sp"/>
 
+        <ImageButton
+            android:id="@+id/movie_like_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:src="@drawable/thumbupoff"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
