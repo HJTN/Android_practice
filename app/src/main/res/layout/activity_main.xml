@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragmentA"
+        android:name="com.example.fragmentpractice.FragmentA"
+        android:layout_weight="1"
+        tools:layout="@layout/activity_main" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/fragmentBorC" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Switch Fragment"
+        android:textSize="20sp"/>
+
+</LinearLayout>
